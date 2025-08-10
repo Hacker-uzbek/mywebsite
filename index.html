@@ -2,123 +2,57 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiberxavfsizlik Sayti</title>
+    <title>OSINT Demo</title>
     <style>
         body {
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            background-color: #0a0a0a;
+            background: #0a0a0a;
             color: #00ff99;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 3em;
-            text-shadow: 0 0 15px #00ff99;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        p {
-            font-size: 1.2em;
-            max-width: 600px;
-            margin: 20px;
-            color: #baffd6;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99; }
-            to { text-shadow: 0 0 20px #00ff99, 0 0 35px #00ff99; }
-        }
-        button {
-            background-color: transparent;
-            color: #00ff99;
-            border: 2px solid #00ff99;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        button:hover {
-            background-color: #00ff99;
-            color: #000;
-            box-shadow: 0 0 20px #00ff99;
-        }
-        footer {
-            position: absolute;
-            bottom: 10px;
-            font-size: 0.9em;
-            color: #555;
-        }
-        /* Terminal effekti */
-        #terminal {
-            background: #000;
-            color: #00ff99;
+            font-family: monospace;
             padding: 20px;
-            margin-top: 20px;
-            width: 80%;
-            max-width: 700px;
-            height: 250px;
-            overflow-y: auto;
-            text-align: left;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.7);
             border: 1px solid #00ff99;
+            padding: 15px;
+            margin-top: 20px;
             border-radius: 8px;
-            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>🌐 Xush kelibsiz!</h1>
-    <p>Bu yerda biz birgalikda <strong>kiberxavfsizlik</strong>ni o‘rganamiz. 
-    Internetning qorong‘i burchaklarini yoritamiz va xavfsiz bo‘lish sirlarini bilib olamiz.</p>
-    <button onclick="startHacking()">Boshlash</button>
+    <h1>🕵️ OSINT Hacking Demo</h1>
+    <p>Tizimga kiring:</p>
+    <input type="text" id="nameInput" placeholder="Ismingiz">
+    <button onclick="getInfo()">Davom etish</button>
 
-    <div id="terminal"></div>
-
-    <footer>© 2025 Cyber Academy | by WHOAMI_UZ</footer>
+    <div id="result" class="card"></div>
 
     <script>
-        const terminal = document.getElementById("terminal");
-        const textLines = [
-            "Initializing Cybersecurity Training Sequence...",
-            "Loading modules: [██████████] 100%",
-            "Connecting to secure server...",
-            "Server connected: 192.168.56.101",
-            "Starting penetration testing environment...",
-            "Access granted ✅",
-            "Welcome to the Cyber Academy, WHOAMI_UZ!"
-        ];
+        async function getInfo() {
+            let name = document.getElementById('nameInput').value || "Noma'lum foydalanuvchi";
 
-        function startHacking() {
-            terminal.style.display = "block";
-            terminal.innerHTML = "";
-            let lineIndex = 0;
+            // 1️⃣ IP va geo ma'lumotlarni olish
+            let ipData = await fetch("https://ipapi.co/json/").then(r => r.json());
 
-            function typeLine() {
-                if (lineIndex < textLines.length) {
-                    let currentLine = textLines[lineIndex];
-                    let charIndex = 0;
-                    let line = document.createElement("div");
+            // 2️⃣ Brauzer location API orqali real-time koordinatalar
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async pos => {
+                    let lat = pos.coords.latitude;
+                    let lon = pos.coords.longitude;
 
-                    function typeChar() {
-                        if (charIndex < currentLine.length) {
-                            line.innerHTML += currentLine.charAt(charIndex);
-                            charIndex++;
-                            setTimeout(typeChar, 10);
-                        } else {
-                            lineIndex++;
-                            setTimeout(typeLine, 500);
-                        }
-                    }
-                    terminal.appendChild(line);
-                    typeChar();
-                }
+                    document.getElementById("result").innerHTML = `
+                        <h2>Salom, ${name}!</h2>
+                        <p>📍 Sizning IP manzilingiz: ${ipData.ip}</p>
+                        <p>🌍 Davlatingiz: ${ipData.country_name}</p>
+                        <p>🏙️ Shaharingiz: ${ipData.city}</p>
+                        <p>🛰️ Aniq koordinatalar: ${lat}, ${lon}</p>
+                        <p>💻 Operatsion tizim: ${navigator.platform}</p>
+                        <p>🌐 Brauzer: ${navigator.userAgent}</p>
+                    `;
+                });
+            } else {
+                document.getElementById("result").innerHTML = "<p>Geolokatsiya API qo'llab-quvvatlanmaydi.</p>";
             }
-            typeLine();
         }
     </script>
 </body>
