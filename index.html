@@ -1,59 +1,1495 @@
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <title>OSINT Demo</title>
-    <style>
-        body {
-            background: #0a0a0a;
-            color: #00ff99;
-            font-family: monospace;
-            padding: 20px;
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Hack The Box Academy" name="description"/>
+        <meta content="Hack The Box" name="author"/>
+
+        <link rel="shortcut icon" href=/images/favicon.ico>
+        <link rel=icon type=image/png sizes=16x16 href=/images/favicon-16x16.png>
+        <link rel=icon type=image/png sizes=32x32 href=/images/favicon-32x32.png>
+        <link rel=apple-touch-icon href=/images/apple-touch-icon.png>
+        <link rel=mask-icon href=/images/safari-pinned-tab.svg>
+
+        <link rel="preload" as="style" href="https://academy.hackthebox.com/build/assets/bootstrap-dark-e2c83920.css" /><link rel="preload" as="style" href="https://academy.hackthebox.com/build/assets/app-dark-d6bbbed3.css" /><link rel="preload" as="style" href="https://academy.hackthebox.com/build/assets/icons-541b9943.css" /><link rel="stylesheet" href="https://academy.hackthebox.com/build/assets/bootstrap-dark-e2c83920.css" /><link rel="stylesheet" href="https://academy.hackthebox.com/build/assets/app-dark-d6bbbed3.css" /><link rel="stylesheet" href="https://academy.hackthebox.com/build/assets/icons-541b9943.css" />        <link href="/assets/libs/prism/prism.css" id="app-style" rel="stylesheet" data-style="dark" type="text/css"/>
+        <link href="/assets/libs/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://use.typekit.net/ryt3opf.css">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://kit.fontawesome.com/8161086d56.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+        <script>
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://fygapokei.hackthebox.com/htb-anal.js/v1/" + key + "/htb-anal.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="eLzeD0QoARKZ42pc8AGEUYpcFLpYkf0I";analytics.SNIPPET_VERSION="4.13.2";
+            analytics.load("eLzeD0QoARKZ42pc8AGEUYpcFLpYkf0I", { integrations: { "Segment.io": { apiHost: "fygapokei.hackthebox.com/v1" }}});
+                        analytics.page("Dashboard");
+                    }
+    }();
+</script>
+
+                <script src="https://www.google.com/recaptcha/api.js?hl=&render=6LeI6LsaAAAAAKgdStgBC6B4UVbXlpYNaYGN46Ah"></script>
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N6XD42V');
+</script>
+<!-- End Google Tag Manager -->
+
+    </head>
+    <body data-layout="detached" data-topbar="colored">
+        <!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6XD42V" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+                <div class="container-fluid">
+            <div id="layout-wrapper" >
+
+                <header id="page-topbar" >
+    <div class="navbar-header">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <div class="navbar-brand-box">
+                        <a href="https://academy.hackthebox.com/dashboard" class="logo">
+                            <span class="logo-sm">
+                                <img src="/images/new-logo-htb.svg" alt="" height="30">
+                            </span>
+                            <span class="logo-md">
+                                <img src="/images/logo.svg" alt="" height="30">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="/images/logo.svg" alt="" height="36">
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <button type="button" class="btn btn-sm font-size-16 header-item toggle-btn waves-effect" id="vertical-menu-btn">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                                                <div class="input-group global-search">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fad fa-search"></i></span>
+                            </div>
+                            <select class="global-search-multiple ma-3 d-none" multiple="multiple"></select>
+                        </div>
+                                            </div>
+                                    </div>
+
+                <div class="float-right">
+                    <a class="btn noti-icon d-none d-lg-inline-block"
+                            class="border-radius-4 font-size-12 color-main d-flex align-center border-top-main-transparent p-2 mx-2 cursor-pointer"
+                            data-toggle="tooltip"
+                            data-title="Changelog"
+                            href="https://roadmap.hackthebox.com/changelog?labels=academy"
+                            rel="noopener"
+                            target="_blank"
+                        >
+                        <img src="/images/icons/ic-canny.svg" class="d-xl-inline-block" width="28" height="28">
+                    </a>
+                    <div class="dropdown d-none d-lg-inline-block ml-1">
+                        <a href="https://academy.hackthebox.com/billing">
+                            <button type="button" class="btn btn-extra-light">
+                                <i class="fad fa-cube text-success mt-1 mr-2"></i>&nbsp;Purchase Cubes
+                            </button>
+                        </a>
+                    </div>
+                    <div class="dropdown d-none d-lg-inline-block ml-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                            <i class="mdi mdi-fullscreen fullscreen-icon"></i>
+                        </button>
+                    </div>
+
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="https://www.gravatar.com/avatar/088c80f849828a50e67e03ca30466f9c?d=robohash" alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ml-1">RedTeamUzbekistan</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="https://academy.hackthebox.com/referral"><i class="bx bx-gift font-size-16 mr-1 align-middle"></i> Refer a friend
+                                    <i class="fa fa-solid fa-circle font-size-6 text-success ml-2 align-middle"></i>
+                                </a>
+                                                        <a class="dropdown-item" href="https://academy.hackthebox.com/billing"><i class="bx bx-wallet font-size-16 mr-1 align-middle"></i> Billing</a>
+                            <a class="dropdown-item d-block" href="https://academy.hackthebox.com/settings"><i class="bx bx-wrench font-size-16 mr-1 align-middle"></i> Settings</a>
+                            <a class="dropdown-item d-block" href="https://academy.hackthebox.com/vpn"><i class="bx bx-server font-size-16 mr-1 align-middle"></i> VPN Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <form method="POST" action="https://academy.hackthebox.com/logout"> <input type="hidden" name="_token" value="tejigvKB2sAXn1crmiNjAvudriJ3d3kIJDpEmYo5" autocomplete="off"> <a class="dropdown-item text-danger log-out" href="#"><i class="bx bx-power-off font-size-16 text-danger mr-1 align-middle"></i> Logout</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+                <div class="vertical-menu overflow-hidden  ">
+    <div class="vertical-menu-overlay"></div>
+    <div class="h-100 overflow-auto">
+        <div class="user-wid text-center py-4">
+            <div class="user-img">
+                <img src="https://www.gravatar.com/avatar/088c80f849828a50e67e03ca30466f9c?d=robohash" alt=""
+                     class="avatar-md mx-auto rounded-circle">
+            </div>
+
+            <div class="mt-3">
+                <p class="text-dark mb-0 font-weight-medium font-size-16">RedTeamUzbekistan</p>
+                                <p class="text-body mt-1 mb-1">
+                                                                        Student
+                                                            </p>
+                <p>
+                    <span class="custom-badge custom-badge-soft-secondary" data-toggle="tooltip"
+                        data-title="Cubes">
+                        <i class="fad fa-cube text-success mr-1"></i>
+                        <span class="cubeBalance">
+                                                            63
+                                                    </span>
+                    </span>
+                                    </p>
+            </div>
+        </div>
+
+        <div id="sidebar-menu">
+    <ul class="metismenu list-unstyled mb-5" id="side-menu">
+
+        <li class="menu-title">Learn</li>
+
+        <li><a class="navDashboard" href="https://academy.hackthebox.com/dashboard"><i
+                        class="mdi mdi-monitor-dashboard"></i> Dashboard</a></li>
+
+                <li>
+            <a class="navDashboard" href="https://academy.hackthebox.com/exams"><i class="mdi mdi-certificate"></i>
+                Exams</a></li>
+        <li>
+            <a class="navModules" href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="mdi mdi-book-open"></i>
+                <span>Modules</span>
+            </a>
+            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                <li><a href="https://academy.hackthebox.com/modules"><i class="mdi mdi-book-open"></i> All Modules</a>
+                </li>
+                <li>
+                    <a href="https://academy.hackthebox.com/modules/inprogress"><i class="mdi mdi-progress-upload"></i>
+                        In-Progress Modules</a></li>
+                <li><a href="https://academy.hackthebox.com/modules/locked"><i
+                                class="mdi mdi-account-arrow-left-outline"></i> Available
+                        Modules</a>
+                </li>
+                <li>
+                    <a href="https://academy.hackthebox.com/modules/unlocked"><i class="mdi mdi-account-check-outline"></i>
+                        Owned
+                        Modules</a></li>
+                <li>
+                    <a href="https://academy.hackthebox.com/modules/changelog"><i class="mdi mdi-playlist-check"></i>
+                        Change Log</a></li>
+                            </ul>
+        </li>
+        <li class="pathsLink">
+            <a class="navPaths" href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="mdi mdi-map-marker-path"></i>
+                <span>Paths</span>
+            </a>
+            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                <li class="skillPathsLink"><a href="https://academy.hackthebox.com/paths"><i
+                                class="mdi mdi-chart-line-variant"></i> Skill Paths</a></li>
+                                    <li class="jobRolePathsLink"><a href="https://academy.hackthebox.com/paths/jobrole"><i
+                                    class="mdi mdi-briefcase"></i> Job Role Paths</a></li>
+                            </ul>
+        </li>
+        <li>
+            <a class="navDashboard" href="https://academy.hackthebox.com/academy-relations"><i
+                        class="mdi mdi-sitemap"></i>
+                Academy x HTB Labs</a>
+        </li>
+        <li class="menu-title">My Achievements</li>
+        <li>
+            <a class="navDashboard" href="https://academy.hackthebox.com/my-certificates"><i class="mdi mdi-certificate"></i>
+                My Certificates </a></li>
+        <li>
+                    <li>
+                <a class="navDashboard" href="https://academy.hackthebox.com/my-badges"><i class="mdi mdi-trophy"></i>
+                    My Badges                         <span class="badge badge-primary float-right">  2</span></a>
+            </li>
+                <li>
+
+                    <li class="menu-title">Referrals</li>
+                <li>
+                    <a class="navDashboard" href="https://academy.hackthebox.com/referral">
+                        <i class="mdi mdi-gift"></i> Invite friends
+                                            </a>
+                <li>
+            <li>
+                        <li class="menu-title">HTB Ecosystem</li>
+        <li>
+            <a class="navHTBEcosystem" target="_blank" href="https://jobs.hackthebox.com">
+                <i class="mdi mdi-briefcase"></i> HTB Jobs
+            </a>
+        </li>
+        <li>
+            <a class="navHTBEcosystem" target="_blank" href="https://app.hackthebox.com">
+                <i class="mdi mdi-beaker"></i> HTB Labs
+            </a>
+        </li>
+        <li>
+            <a class="navHTBEcosystem" target="_blank" href="https://ctf.hackthebox.com">
+                <i class="mdi mdi-flag"></i> HTB CTF
+            </a>
+        </li>
+        <li>
+            <a class="navHTBEcosystem" target="_blank" href="https://resources.hackthebox.com/hack-the-box-enterprise?utm_campaign=b2c2b&amp;utm_source=academy&amp;utm_medium=cta_homepage">
+                <i class="mdi mdi-domain"></i> HTB for Business
+            </a>
+        </li>
+        <li class="menu-title">Get Help</li>
+        <li>
+            <a class="navSupport" href="http://help.hackthebox.eu/" rel="noopener nofollow norefferer"
+               target="_blank"><i class="mdi mdi-help-box"></i>Help Center</a></li>
+        <li><a class="navSupport" data-toggle="tooltip" href="https://academy.hackthebox.com/faq"><i
+                        class="mdi mdi-help-circle"></i> FAQ</a></li>
+        <li>
+            <a class="navSupport"
+                class="border-radius-4 font-size-12 color-main d-flex align-center border-top-main-transparent px-2 py-2 mx-2 cursor-pointer"
+                href="https://roadmap.hackthebox.com/changelog?labels=academy"
+                rel="noopener"
+                target="_blank">
+                <img src="/images/icons/ic-canny.svg" class="d-xl-inline-block" width="28" height="25">
+                Changelog
+            </a>
+        </li>
+        <li><a class="navSupport" href="https://discord.gg/hackthebox"
+               rel="noopener nofollow norefferer" target="_blank"><i class="mdi mdi-discord"></i>
+                Discord</a></li>
+    </ul>
+</div>
+
+    </div>
+</div>
+                <div class="main-content">
+                    <div class="page-content">
+                        <div id="app">
+                                <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="page-title mb-0 font-size-18">Dashboard</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+
+            </div>
+                                                </div>
+    </div>
+
+    <div class="row dashboard-content ">
+        <div class="col-md-12 col-xl-8">
+            <div class="card userProgress">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4 d-flex justify-content-center">
+                            <div>
+                                <div class="red">
+                                    <div class="progress">
+                                        <div class="inner">
+                                            <div class="percent"><span class="redPercent">0</span>%</div>
+                                            <div class="water redWater"></div>
+                                            <div class="glare"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <h6>Offensive</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <div>
+                                <div class="blue">
+                                    <div class="progress">
+                                        <div class="inner">
+                                            <div class="percent"><span class="bluePercent">0</span>%</div>
+                                            <div class="water blueWater"></div>
+                                            <div class="glare"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <h6>Defensive</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <div>
+                                <div class="green">
+                                    <div class="progress">
+                                        <div class="inner">
+                                            <div class="percent"><span class="greenPercent">0</span>%</div>
+                                            <div class="water greenWater"></div>
+                                            <div class="glare"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <h6>General</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                            <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4"><i class="fad fa-clipboard-list mr-2"></i> Currently Enrolled Path
+                        </h4>
+                        <div class="row">
+                                                            <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-8">
+                                                <div class="row">
+                                                    <div class="col-4 pr-0">
+                                                        <img class="card-img img-fluid"
+                                                             style="height: 94px; object-fit: cover;"
+                                                             src="/storage/paths/16/logo.png" alt="Card image">
+                                                    </div>
+                                                    <div class="col-8 pl-0">
+                                                        <div class="card-body">
+                                                            <p class="mb-2">Current Path</p>
+                                                            <h5 class="mb-0">Penetration Tester</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                                                                        <div class="col-4 card-body pr-4">
+                                                <div class="text-right">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                                                                                            <a href="https://academy.hackthebox.com/paths/continue">
+                                                                    <button
+                                                                            class="btn btn-success btn-block btn-sm text-light">
+                                                                        Continue
+                                                                    </button>
+                                                                </a>
+                                                                                                                    </div>
+                                                        <div class="col-5">
+                                                            6.46%
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress progress-sm mt-3">
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                             style="width: 6.46%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless table-striped table-centered table-hover mb-0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Progress</th>
+                                    <th scope="col">Difficulty</th>
+                                    <th scope="col" colspan="2"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/90">Penetration Testing Process</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 15 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Fundamental</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <a class="text-muted startModule-90"
+                                                           href="https://academy.hackthebox.com/module/90">
+                                                            <button
+                                                                    class="btn btn-block btn-primary btn-sm startModule">
+                                                                Start
+                                                            </button>
+                                                        </a>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/77">Getting Started</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="10 / 23 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 43.48%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Fundamental</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                <a class="text-muted" href="https://academy.hackthebox.com/module/77">
+                                                        <button class="btn btn-block btn-success btn-sm text-light">
+                                                            Continue
+                                                        </button>
+                                                    </a>
+                                                                                                                                    </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/19">Network Enumeration with Nmap</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="12 / 12 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 100%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                            <a href="https://academy.hackthebox.com/module/19"
+                                                   class="btn btn-block btn-light btn-sm"> View</a>
+                                                                                    </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/112">Footprinting</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 21 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="112">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/144">Information Gathering - Web Edition</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 19 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="144">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/108">Vulnerability Assessment</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 17 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="108">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/24">File Transfers</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 10 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="24">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/115">Shells &amp; Payloads</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 17 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="115">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/39">Using the Metasploit Framework</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 15 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="39">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/147">Password Attacks</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 26 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="147">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/116">Attacking Common Services</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 19 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="116">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/158">Pivoting, Tunneling, and Port Forwarding</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 18 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="158">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/143">Active Directory Enumeration &amp; Attacks</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 36 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="143">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/110">Using Web Proxies</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 15 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="110">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/54">Attacking Web Applications with Ffuf</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 13 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="54">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/57">Login Brute Forcing</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 13 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="57">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/33">SQL Injection Fundamentals</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 17 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="33">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/58">SQLMap Essentials</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 11 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="58">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/103">Cross-Site Scripting (XSS)</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="10 / 10 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 100%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                            <a href="https://academy.hackthebox.com/module/103"
+                                                   class="btn btn-block btn-light btn-sm"> View</a>
+                                                                                    </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/23">File Inclusion</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 11 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="23">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/136">File Upload Attacks</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 11 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="136">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/109">Command Injections</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 12 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="109">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/134">Web Attacks</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 18 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="134">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/113">Attacking Common Applications</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 33 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="113">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/51">Linux Privilege Escalation</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 28 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="51">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/67">Windows Privilege Escalation</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 33 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="67">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/162">Documentation &amp; Reporting</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 8 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-success font-size-12">Easy</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="162">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><a href="https://academy.hackthebox.com/module/details/163">Attacking Enterprise Networks</a>
+                                            
+                                            
+
+                                        </td>
+                                        <td width="35%">
+                                            <div class="progress animated-progess" data-toggle="tooltip"
+                                                 data-title="0 / 14 complete">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 0%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span
+                                                    class="badge badge-soft-warning font-size-12">Medium</span>
+                                        </td>
+                                        <td>
+                                                                                                                                                                                                        <button class="btn btn-block btn-primary btn-sm startStudent"
+                                                                data-module-id="163">Start
+                                                        </button>
+                                                                                                                                                                                        </td>
+                                    </tr>
+                                                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="card todoModules">
+                <div class="card-body">
+                    <h4 class="card-title mb-4"><i class="fad fa-clipboard-list mr-2" data-toggle="tooltip" data-placement="top" title="Favorite Modules"></i> Favorite Modules List</h4>
+
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-striped table-centered table-hover mb-0" aria-describedby="favorite modules table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Progress</th>
+                                <th scope="col">Difficulty</th>
+                                <th scope="col" colspan="2"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                                            <tr>
+                                    <td><i style="cursor: pointer" data-toggle="tooltip" data-title="Remove from To-Do"
+                                           data-module-id="15" class="fa-duotone fa-circle-xmark favouriteBtn"></i>
+                                        &nbsp;<a href="https://academy.hackthebox.com/module/details/15">Intro to Academy</a>
+                                    </td>
+                                    <td width="35%">
+                                        <div class="progress animated-progess" data-toggle="tooltip"
+                                             data-title="8 / 8 complete">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 100%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span
+                                                class="badge badge-soft-success font-size-12">Fundamental</span>
+                                    </td>
+                                    <td>
+                                                                                    <a href="https://academy.hackthebox.com/module/15"
+                                               class="btn btn-block btn-light btn-sm"> View</a>
+                                                                            </td>
+                                </tr>
+                                                            <tr>
+                                    <td><i style="cursor: pointer" data-toggle="tooltip" data-title="Remove from To-Do"
+                                           data-module-id="19" class="fa-duotone fa-circle-xmark favouriteBtn"></i>
+                                        &nbsp;<a href="https://academy.hackthebox.com/module/details/19">Network Enumeration with Nmap</a>
+                                    </td>
+                                    <td width="35%">
+                                        <div class="progress animated-progess" data-toggle="tooltip"
+                                             data-title="12 / 12 complete">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 100%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span
+                                                class="badge badge-soft-success font-size-12">Easy</span>
+                                    </td>
+                                    <td>
+                                                                                    <a href="https://academy.hackthebox.com/module/19"
+                                               class="btn btn-block btn-light btn-sm"> View</a>
+                                                                            </td>
+                                </tr>
+                                                            <tr>
+                                    <td><i style="cursor: pointer" data-toggle="tooltip" data-title="Remove from To-Do"
+                                           data-module-id="103" class="fa-duotone fa-circle-xmark favouriteBtn"></i>
+                                        &nbsp;<a href="https://academy.hackthebox.com/module/details/103">Cross-Site Scripting (XSS)</a>
+                                    </td>
+                                    <td width="35%">
+                                        <div class="progress animated-progess" data-toggle="tooltip"
+                                             data-title="10 / 10 complete">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 100%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span
+                                                class="badge badge-soft-success font-size-12">Easy</span>
+                                    </td>
+                                    <td>
+                                                                                    <a href="https://academy.hackthebox.com/module/103"
+                                               class="btn btn-block btn-light btn-sm"> View</a>
+                                                                            </td>
+                                </tr>
+                                                            <tr>
+                                    <td><i style="cursor: pointer" data-toggle="tooltip" data-title="Remove from To-Do"
+                                           data-module-id="90" class="fa-duotone fa-circle-xmark favouriteBtn"></i>
+                                        &nbsp;<a href="https://academy.hackthebox.com/module/details/90">Penetration Testing Process</a>
+                                    </td>
+                                    <td width="35%">
+                                        <div class="progress animated-progess" data-toggle="tooltip"
+                                             data-title="0 / 15 complete">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 0%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span
+                                                class="badge badge-soft-success font-size-12">Fundamental</span>
+                                    </td>
+                                    <td>
+                                                                                    
+                                                                                                    <a class="text-muted startModule-90"
+                                                       href="https://academy.hackthebox.com/module/90">
+                                                        <button class="btn btn-block btn-primary btn-sm startModule">
+                                                            Start
+                                                        </button>
+                                                    </a>
+                                                                                                                                                                        </td>
+                                </tr>
+                                                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-md-12 col-xl-4">
+            <div class="streak-card mb-4">
+        <div class="card-body d-flex flex-column justify-content-between mt-0">
+            <div class="d-flex space-between w-100 mb-2">
+                <h4 class="streak-card-title mb-0">Weekly Streak
+                    <span tabindex="0" class="cursor-pointer font-size-14" data-trigger="focus hover"
+                          data-placement="top" data-toggle="popover"
+                          title="Weekly Streak" data-content="Is the number of weeks in a row you have completed the Weekly Goal. Reach 30 Streak Points every week to keep your Streak live and win special rewards." aria-hidden="true">
+                        <i class="fa fa-info-circle font-size-12"></i></span>
+                    <span class="streak-beta-label">BETA</span>
+                </h4>
+                <div class="streak-card-counter-wrapper">
+            <div
+            class="streak-card-icon flame">
+        </div>
+        <p class="streak-counter">2</p>
+</div>
+            </div>
+            <div class="d-flex flex-column">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <p class="streak-card-subtitle mb-0  invisible "
+                        aria-hidden="true" >This Week</p>
+                    <div tabindex="0" class="cursor-pointer font-size-14 d-flex align-items-center" data-trigger="focus hover"
+     data-placement="top"
+     data-html="true"
+     data-toggle="popover" title="Streak Saver" data-content="Keep your streak alive! Annual subscribers are granted &lt;span class=&#039;text-success&#039;&gt;one (1) streak saver per month&lt;/span&gt;,
+    up to a &lt;span class=&#039;text-success&#039;&gt;total of three (3)&lt;/span&gt;. Automatically applied on &lt;span class=&#039;text-success&#039;&gt;Mondays 00:00 UTC&lt;/span&gt;, to maintain the previous week&#039;s streak, provided there is at least one available streak saver."
+     aria-hidden="true">
+            <div
+            class="streak-saver-badge  empty "></div>
+            <div
+            class="streak-saver-badge  empty "></div>
+            <div
+            class="streak-saver-badge  empty "></div>
+    </div>
+                </div>
+                <div class="streak-summary-wrapper">
+            <div>
+            <p class="mb-1 text-white font-size-14 font-medium">Goal Completed!</p>
+            <p class="mb-0 font-size-14 streak-badge-subtitle">Your Streak is saved till next week.</p>
+        </div>
+         <div class="streak-card-icon completed-badge"></div>     </div>
+<div class="progress animated-progess">
+            <div class="progress-bar streak-complete"
+            role="progressbar" style="width: 100%">
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+
+                            <div class="card-referral mb-4">
+                    <div class="card-body justify-content-between w-100">
+                        <div class="row w-100">
+                            <div class="card-tile-referral-bg"></div>
+                            <div class="col-10">
+                                <h4 class="card-title mb-4"><i class="fad fa-gift mr-2"></i> Refer a friend</h4>
+                                <p>Refer a Friend, Earn Cubes, Unlock Academy Modules!</p>
+                            </div>
+                            <div class="col-12 d-flex align-items-center justify-content-between">
+                                <a href="/referral">
+                                    <button class="btn btn-outline-secondary referral-btn">Go to My Referrals</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                                                    <div class="col-10">
+                                <h4 class="card-title mb-4"><i class="fad fa-shopping-cart mr-2"></i> My Plan</h4>
+                                <h5>Student</h5>
+
+                                <p>
+                                                                    </p>
+
+                            </div>
+                            <div class="col-2">
+                                <i class="fad fa-user-graduate h1 text-muted"></i>
+                            </div>
+                            <div class="col-12">
+                                <a href="https://academy.hackthebox.com/billing" class="btn btn-extra-light btn-block"
+                                   style="height: 38px"><i class="fad fa-cube text-success mr-2"></i> Purchase Cubes</a>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                        <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4"><i class="fad fa-clipboard-check mr-2"></i> Completed Paths</h4>
+                                            <h4><i class="far fa-frown-open"></i> None
+                                    </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4"><i class="fad fa-clipboard-check mr-2"></i> Completed Modules</h4>
+                                            <a href="https://academy.hackthebox.com/module/complete/15">
+                            <button class="btn btn-light btn-sm btn-block mt-2 text-left">
+
+                                <i class="fad fa-check-circle text-success"></i>&nbsp;
+                                Intro to Academy
+                            </button>
+                        </a>
+                                            <a href="https://academy.hackthebox.com/module/complete/19">
+                            <button class="btn btn-light btn-sm btn-block mt-2 text-left">
+
+                                <i class="fad fa-check-circle text-success"></i>&nbsp;
+                                Network Enumeration with Nmap
+                            </button>
+                        </a>
+                                            <a href="https://academy.hackthebox.com/module/complete/103">
+                            <button class="btn btn-light btn-sm btn-block mt-2 text-left">
+
+                                <i class="fad fa-check-circle text-success"></i>&nbsp;
+                                Cross-Site Scripting (XSS)
+                            </button>
+                        </a>
+                                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="unlockModuleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="unlockModuleModal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <h5><i class="fad fa-lock text-success"></i>&nbsp; Unlock</h5>
+                        <h6>Module: <span class="unlockModuleName"></span></h6>
+                        <p>By clicking the Unlock button below, you will spend <span class="badge badge-soft-secondary"><i
+                                        class="fad fa-cube text-success"></i> <span class="unlockCost"></span></span>
+                            and
+                            gain access to this module.</p>
+                        <button id="unlockConfirmBtn" data-dismiss="modal" class="btn btn-outline-success btn-block">
+                            Unlock for <span class="unlockCost"></span> <i class="fad fa-cube"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                            <div id="referralModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="referralModal"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center border-0">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true"><img src="/images/close.svg" alt="close" /></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <img src="/images/htb-coin.svg" alt="coin icon" />
+                    <h1 class="text-white">Refer &amp; Earn</h1>
+                    <p class="text-secondary font-size-20">
+                        Refer a Friend, Earn Cubes, Unlock Academy Modules!
+                    </p>
+                    <div class="d-flex flex-column">
+                        <a href="/referral">
+                            <button type="button" class="btn btn-success btn-invite-friend text-light my-4">
+                                Invite Friends
+                            </button>
+                        </a>
+                        <button type="button" id="disableReferralModalBtn" onclick="disableModalRedisplay()" class="btn mt-2 mb-3 d-none">
+                            Don't show it again
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                        </div>
+
+                    </div>
+
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-sm-right d-none d-sm-block">
+                                        Powered by &nbsp;
+                                        <a href="https://www.hackthebox.com" target="_blank">
+                                            <img class="mb-0" src="/images/logo-htb.svg" alt="log-htb" height="20px"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+
+            </div>
+                    </div>
+
+        <script src="/assets/libs/jquery/jquery.min.js"></script>
+        <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="/assets/libs/node-waves/waves.min.js"></script>
+        <script src="/assets/libs/toastr/toastr.min.js"></script>
+        <script src="/assets/libs/dompurify/purify.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+            integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <link rel="preload" as="style" href="https://academy.hackthebox.com/build/assets/vue-radial-progress-a171cc18.css" /><link rel="preload" as="style" href="https://academy.hackthebox.com/build/assets/app-1eef33f6.css" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/app-167cac1f.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/lodash-c1890673.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vue-markdown-render-373cff4e.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vue-router-d40907bb.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vuex-25bbbfbe.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vue-radial-progress-faa564d7.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/popper-f4af5ef6.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vuejs-countdown-timer-c912f970.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vue-screen-5ca5066c.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/vue2-perfect-scrollbar-dc6fc349.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/main-6ae9ad2c.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/just-detect-adblock-220f5df6.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/referral-6739fc5a.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/search-9d704a76.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/highlight-7da7a00a.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/prism-1582e0e3.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/detectBrowser-fc4c37dc.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/core-helpers-aa8e1eb6.js" /><link rel="modulepreload" href="https://academy.hackthebox.com/build/assets/index-38146d66.js" /><link rel="stylesheet" href="https://academy.hackthebox.com/build/assets/vue-radial-progress-a171cc18.css" /><link rel="stylesheet" href="https://academy.hackthebox.com/build/assets/app-1eef33f6.css" /><script type="module" src="https://academy.hackthebox.com/build/assets/app-167cac1f.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/main-6ae9ad2c.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/referral-6739fc5a.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/search-9d704a76.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/highlight-7da7a00a.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/prism-1582e0e3.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/detectBrowser-fc4c37dc.js"></script><script type="module" src="https://academy.hackthebox.com/build/assets/core-helpers-aa8e1eb6.js"></script>
+
+        
+        <script>
+                            setTimeout(() => {
+                    window.initReferralScheme();
+                }, 1000);
+            
+                        
+            $('#app').after(`
+        <div id='adBlockModal' class='modal fade'  tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+            <div class='vertical-alignment-helper'>
+                <div class='modal-dialog ' role='document'>
+                    <div class='modal-content'>
+                      <div class='modal-header text-center'>
+                        <h5 class='modal-title w-100'>Hack The Box Technical Support</h5>
+                        <button id='dismissAdblockerBtn'  type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                          <span aria-hidden='true'><img src='/images/close.svg' alt='close'></span>
+                        </button>
+                      </div>
+                      <div class='modal-body'>
+                        <div class='row justify-content-center'>
+                            <img src='/images/warning.svg' alt='warning' class='mb-3 warning-icon'>
+                        </div>
+                        <h1 class='text-center'>Adblock Detected</h1>
+                        <p class='text-center'>
+                            Please note that the Technical Support chat won't load if affected by any Ad or Script blockers. We request you to whitelist our connections in your adblocking plugin.
+                        </p>
+                      </div>
+                      <div class=' text-center pb-5'>
+                        <button id='dismissAdblockerBtn2' type='button' class='btn btn-success color-gray-dark px-5 py-3 font-size-xxs dismissAdblockerBtn' data-dismiss='modal'>GOT IT</button>
+                      </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+    `);
+
+
+            $(document).ready(function() {
+                const csrfToken = 'tejigvKB2sAXn1crmiNjAvudriJ3d3kIJDpEmYo5';
+                const apiToken= '35LfeMRrfoswmxzHIwRKUe4uWB8haRtH0Y4kHw6tyl4QIAgAKbA5OGU184C4k4ERTf9XtnpkUSGLIOoU';
+                initAxios(csrfToken,apiToken);
+
+                            });
+        </script>
+
+        
+    <script src="https://fast.appcues.com/213301.js"></script>
+
+<script>
+    var module_id = null;
+      $('.favouriteBtn').click(function() {
+        let id = $(this).data('module-id');
+
+        axios.get('/api/modules/favourite/' + id).then(response => {
+          let data = response.data;
+          if (data.fav === 0) {
+            $(this).parent().parent().remove();
+            toastr['success'](data.message, 'Success');
+          }
+        });
+      });
+
+      $('.unlockModuleBtn').click(function() {
+        module_id = $(this).data('module-id');
+        var cubes = $(this).data('module-cubes');
+        var name = $(this).data('module-name');
+        $('.unlockCost').html(cubes);
+        $('.unlockModuleName').html(name);
+      });
+
+      $('#unlockConfirmBtn').click(function() {
+        axios.post('/api/modules/unlock', {
+          module_id: module_id
+        }).then(response => {
+          let data = response.data;
+          if (data.success === 0) {
+            toastr['error'](data.message, 'Error');
+          } else {
+            $('.startModule-' + module_id).show();
+            $('.unlockModule-' + module_id).hide();
+            $('.cubeBalance').html(data.balance);
+            toastr['success'](data.message, 'Success');
+          }
+        });
+      });
+
+
+      $('.startStudent').click(function() {
+        let module_id = $(this).data('module-id');
+        axios.post('/api/modules/unlock', {
+          module_id: module_id
+        }).then(response => {
+          let data = response.data;
+          if (data.success === 0) {
+            toastr['error'](data.message, 'Error');
+          } else {
+            window.location.href = '/module/' + module_id;
+          }
+        });
+      });
+
+      function progress(color, number) {
+        $('.' + color + 'Percent').html(number.toFixed(2));
+        $('.' + color + 'Water').css({ top: (100 - number) + '%' });
+      }
+
+      $(document).ready(function() {
+        progress('red', 2.24);
+        progress('blue', 0.00);
+        progress('green', 1.81);
+      });
+
+
+      analytics.identify('80f6ae77a5f15d0d03be3e4f19324ae9', {
+        academy_user_id: '1853962',
+        name: 'RedTeamUzbekistan',
+        email: 'toshpolatovolim1@gmail.com'
+      }, {
+        integrations: {
+          Intercom: {
+            user_hash: 'e44ef3eb97c324da080f87650e6137c3c582e840fcadb51aba51e508bb84fded'
+          }
         }
-        .card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid #00ff99;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-    <h1>🕵️ OSINT Hacking Demo</h1>
-    <p>Tizimga kiring:</p>
-    <input type="text" id="nameInput" placeholder="Ismingiz">
-    <button onclick="getInfo()">Davom etish</button>
+      });
 
-    <div id="result" class="card"></div>
+              window.Appcues?.identify('9e81dbf5-c34b-4bbb-99b2-e934d115f85e', {
+            academy_user_id: '1853962',
+            academy_user_anonymized_id: '80f6ae77a5f15d0d03be3e4f19324ae9',
+        });
+      </script>
 
-    <script>
-        async function getInfo() {
-            let name = document.getElementById('nameInput').value || "Noma'lum foydalanuvchi";
-
-            // 1️⃣ IP va geo ma'lumotlarni olish
-            let ipData = await fetch("https://ipapi.co/json/").then(r => r.json());
-
-            // 2️⃣ Brauzer location API orqali real-time koordinatalar
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async pos => {
-                    let lat = pos.coords.latitude;
-                    let lon = pos.coords.longitude;
-
-                    document.getElementById("result").innerHTML = `
-                        <h2>Salom, ${name}!</h2>
-                        <p>📍 Sizning IP manzilingiz: ${ipData.ip}</p>
-                        <p>🌍 Davlatingiz: ${ipData.country_name}</p>
-                        <p>🏙️ Shaharingiz: ${ipData.city}</p>
-                        <p>🛰️ Aniq koordinatalar: ${lat}, ${lon}</p>
-                        <p>💻 Operatsion tizim: ${navigator.platform}</p>
-                        <p>🌐 Brauzer: ${navigator.userAgent}</p>
-                    `;
-                });
-            } else {
-                document.getElementById("result").innerHTML = "<p>Geolokatsiya API qo'llab-quvvatlanmaydi.</p>";
-            }
-        }
-    </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"96d1783f1c428055","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.7.0","token":"9d8cb854dbf443df9a649c27660a2bb6"}' crossorigin="anonymous"></script>
 </body>
+
 </html>
