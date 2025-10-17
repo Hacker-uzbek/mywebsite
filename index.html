@@ -1,59 +1,231 @@
-<!DOCTYPE html>
-<html lang="uz">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>OSINT Demo</title>
-    <style>
-        body {
-            background: #0a0a0a;
-            color: #00ff99;
-            font-family: monospace;
-            padding: 20px;
-        }
-        .card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid #00ff99;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Acme — Modern Responsive Site</title>
+  <meta name="description" content="A fully styled responsive website template with gallery, pricing, and contact form." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%233046ff'/%3E%3Ctext x='50' y='57' font-size='48' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#0f1724" />
 </head>
-<body>
-    <h1>🕵️ OSINT Hacking Demo</h1>
-    <p>Tizimga kiring:</p>
-    <input type="text" id="nameInput" placeholder="Ismingiz">
-    <button onclick="getInfo()">Davom etish</button>
+<body class="theme-light">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#hero">
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden><rect width="48" height="48" rx="8" fill="url(#g)"/><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+        <span>Acme</span>
+      </a>
 
-    <div id="result" class="card"></div>
+      <nav id="nav" class="nav">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <script>
-        async function getInfo() {
-            let name = document.getElementById('nameInput').value || "Noma'lum foydalanuvchi";
+      <div class="header-actions">
+        <button id="themeToggle" class="btn-ghost" aria-label="Toggle theme">🌓</button>
+        <button id="navToggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-            // 1️⃣ IP va geo ma'lumotlarni olish
-            let ipData = await fetch("https://ipapi.co/json/").then(r => r.json());
+  <main>
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Beautiful design. Fast performance.</h1>
+          <p class="lead">A modern responsive website template. Ready for production. Includes gallery, pricing, contact form, and light interactions.</p>
+          <div class="cta-row">
+            <a class="btn-primary" href="#pricing">Get started</a>
+            <a class="btn-outline" href="#gallery">View gallery</a>
+          </div>
+          <ul class="meta">
+            <li>⚡️ Fast</li>
+            <li>🔒 Secure</li>
+            <li>♿ Accessible</li>
+          </ul>
+        </div>
 
-            // 2️⃣ Brauzer location API orqali real-time koordinatalar
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async pos => {
-                    let lat = pos.coords.latitude;
-                    let lon = pos.coords.longitude;
+        <div class="hero-card" aria-hidden="false">
+          <div class="device-mock">
+            <img alt="App screenshot mock" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='520'%3E%3Crect width='800' height='520' rx='20' fill='%23102538'/%3E%3Crect x='40' y='60' width='720' height='400' rx='12' fill='%23fff'/%3E%3Ctext x='400' y='290' font-size='24' font-family='Arial' text-anchor='middle' fill='%23092538'%3ESample Screenshot%3C/text%3E%3C/svg%3E" />
+          </div>
+        </div>
+      </div>
+    </section>
 
-                    document.getElementById("result").innerHTML = `
-                        <h2>Salom, ${name}!</h2>
-                        <p>📍 Sizning IP manzilingiz: ${ipData.ip}</p>
-                        <p>🌍 Davlatingiz: ${ipData.country_name}</p>
-                        <p>🏙️ Shaharingiz: ${ipData.city}</p>
-                        <p>🛰️ Aniq koordinatalar: ${lat}, ${lon}</p>
-                        <p>💻 Operatsion tizim: ${navigator.platform}</p>
-                        <p>🌐 Brauzer: ${navigator.userAgent}</p>
-                    `;
-                });
-            } else {
-                document.getElementById("result").innerHTML = "<p>Geolokatsiya API qo'llab-quvvatlanmaydi.</p>";
-            }
-        }
-    </script>
+    <section id="features" class="section">
+      <div class="container">
+        <h2 class="section-title">Features</h2>
+        <p class="section-sub">Practical features that ship with the template.</p>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Performance</h3>
+            <p>Optimized markup and small CSS. Fast paint and minimal layout shifts.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🎨</div>
+            <h3>Design System</h3>
+            <p>Colour variables, typography scale, and a modular layout system.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>Integrations</h3>
+            <p>Contact form hook, simple lightbox, theme toggle, and smooth scrolling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section alt">
+      <div class="container">
+        <h2 class="section-title">Pricing</h2>
+        <p class="section-sub">Three simple plans. No surprise fees.</p>
+
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h3>Starter</h3>
+            <div class="price">$0<span>/mo</span></div>
+            <ul>
+              <li>Single project</li>
+              <li>Basic support</li>
+              <li>Community</li>
+            </ul>
+            <a class="btn-primary" href="#contact">Sign up</a>
+          </div>
+
+          <div class="price-card popular">
+            <div class="badge">Most popular</div>
+            <h3>Pro</h3>
+            <div class="price">$19<span>/mo</span></div>
+            <ul>
+              <li>Unlimited projects</li>
+              <li>Priority support</li>
+              <li>Team seats</li>
+            </ul>
+            <a class="btn-primary" href="#contact">Start free trial</a>
+          </div>
+
+          <div class="price-card">
+            <h3>Enterprise</h3>
+            <div class="price">Custom</div>
+            <ul>
+              <li>Dedicated support</li>
+              <li>SLAs and security</li>
+              <li>Onboarding</li>
+            </ul>
+            <a class="btn-outline" href="#contact">Contact sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section">
+      <div class="container">
+        <h2 class="section-title">Gallery</h2>
+        <p class="section-sub">Images use inline SVG placeholders. Replace with real images.</p>
+
+        <div class="gallery-grid" aria-live="polite">
+          <!-- 8 images -->
+          <button class="gallery-item" data-src="img1" aria-label="Open image 1">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#C7D2FE"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#1E293B" font-size="24">Image 1</text></svg>
+          </button>
+          <button class="gallery-item" data-src="img2" aria-label="Open image 2">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#FEF3C7"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#92400E" font-size="24">Image 2</text></svg>
+          </button>
+          <button class="gallery-item" data-src="img3" aria-label="Open image 3">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#D1FAE5"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#065F46" font-size="24">Image 3</text></svg>
+          </button>
+          <button class="gallery-item" data-src="img4" aria-label="Open image 4">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#FCE7F3"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#831843" font-size="24">Image 4</text></svg>
+          </button>
+
+          <button class="gallery-item" data-src="img5" aria-label="Open image 5">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#E0E7FF"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#3730A3" font-size="24">Image 5</text></svg>
+          </button>
+          <button class="gallery-item" data-src="img6" aria-label="Open image 6">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#FFF7ED"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#92400E" font-size="24">Image 6</text></svg>
+          </button>
+          <button class="gallery-item" data-src="img7" aria-label="Open image 7">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#E6FFFA"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#0F766E" font-size="24">Image 7</text></svg>
+          </button>
+          <button class="gallery-item" data-src="img8" aria-label="Open image 8">
+            <svg viewBox="0 0 400 260" role="img"><rect width="100%" height="100%" fill="#F0F9FF"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#0369A1" font-size="24">Image 8</text></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+        <button id="lbClose" class="lb-close" aria-label="Close">✕</button>
+        <div id="lbContent" class="lb-content" role="document"></div>
+        <button id="lbPrev" class="lb-nav" aria-label="Previous">‹</button>
+        <button id="lbNext" class="lb-nav" aria-label="Next">›</button>
+      </div>
+    </section>
+
+    <section id="contact" class="section alt">
+      <div class="container contact-grid">
+        <div>
+          <h2 class="section-title">Contact</h2>
+          <p class="section-sub">Send a message. The form validates locally and composes an email via mailto as fallback.</p>
+
+          <ul class="contact-list">
+            <li><strong>Email</strong><br/><a href="mailto:hello@acme.example">hello@acme.example</a></li>
+            <li><strong>Phone</strong><br/><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+            <li><strong>Address</strong><br/>123 Main St, Metropolis</li>
+          </ul>
+        </div>
+
+        <form id="contactForm" class="form" novalidate>
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" required minlength="2" />
+            <small class="err" aria-live="polite"></small>
+          </label>
+
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required />
+            <small class="err" aria-live="polite"></small>
+          </label>
+
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="5" required minlength="10"></textarea>
+            <small class="err" aria-live="polite"></small>
+          </label>
+
+          <div class="form-row">
+            <button type="submit" class="btn-primary">Send message</button>
+            <button type="reset" class="btn-outline">Reset</button>
+          </div>
+
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>© <span id="year"></span> Acme. All rights reserved.</small>
+      <div class="social">
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="GitHub">🐙</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
